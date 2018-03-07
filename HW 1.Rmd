@@ -1,0 +1,104 @@
+---
+title: "HW 1"
+author: "Talal Alzahrani"
+date: "1/31/2018"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+
+1-Install.packages(“rmarkdown”) and review cheat sheet.
+
+
+#library(rmarkdown)
+
+
+2-Read in the LogReg dataset by creating a variable and data.frame, then take a look at the
+first few lines using the head() function, but also take a look using the fix() and dim()
+
+library(readr)
+LogReg <- read_csv("LogReg.csv")
+
+```{r,LogReg}
+#dim(LogReg)
+```
+```{r}
+#head(LogReg)
+```
+
+
+```{r}
+#fix(LogReg)
+```
+
+3- Create some graphics using ggplot: Need to install the tidyverse package and call the
+ggplot2 library.
+
+```{r}
+#install.packages("tidyverse")
+#Library("tidyverse")
+#library(ggplot2)
+plot(LogReg$gre)
+plot(LogReg$gpa)
+plot(LogReg$rank)
+```
+
+
+4.Install the ISLR package and load the library. There is a dataset called Auto in that library.
+```{r}
+#install.packages("ISLR")
+#library(ISLR)
+```
+
+5.Similar to the previous exercise run a functions to get to know the dataframe (Fix, Dim, Head, ?)
+```{r}
+dim(Auto)
+```
+```{r}
+head(Auto)
+```
+```{r}
+fix(Auto)
+```
+
+6.Next run some basic summary stats to gather some additional data Packages: pastecs, Hmisc and Sapply
+```{r pressure, echo=FALSE}
+#install.packages("pastecs")
+#library(pastecs)
+#install.packages("Hmisc")
+#library(Hmisc)
+#install.packages("Sapply")
+#library(Sapply)
+```
+```{r}
+summary(Auto)
+```
+
+7.Change the variable name for “year” to “YYYY”
+```{r}
+colnames(Auto)[7]='YYYY'
+```
+
+8.Change the values for year 70 to 1970, 71 to 1971, and so forth, for all entries
+```{r}
+Auto$year=paste('19', Auto$year, sep='')
+```
+
+9.Subset the data to determine the average mileage per gallon both per year and by cylinder
+```{r}
+aggregate(mpg~YYYY,data=Auto,mean)
+aggregate(mpg~cylinders,data=Auto,mean)
+```
+
